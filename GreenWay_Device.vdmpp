@@ -1,0 +1,35 @@
+class GreenWay_Device
+types
+-- TODO Define types here
+/*
+public DeviceID = nat1;
+public Balance = nat;
+*/
+
+
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+
+public balance : nat :=0;
+public id : nat1;
+
+
+operations
+-- TODO Define operations here
+
+--construtor
+public GreenWay_Device : nat1 * nat ==> GreenWay_Device
+	GreenWay_Device(ID,balan) == (
+	
+	id := ID;
+	balance := balan;
+	return self;
+	);
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end GreenWay_Device
