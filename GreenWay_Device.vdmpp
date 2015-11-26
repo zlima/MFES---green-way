@@ -1,9 +1,10 @@
 class GreenWay_Device
 types
 -- TODO Define types here
-/*
+
 public DeviceID = nat1;
 public Balance = nat;
+/*
 */
 
 
@@ -12,20 +13,21 @@ values
 instance variables
 -- TODO Define instance variables here
 
-public balance : nat :=0;
-public id : nat1;
+public balance : Balance :=0;
+public id : DeviceID;
 
 
 operations
 -- TODO Define operations here
 
 --construtor
-public GreenWay_Device : nat1 * nat ==> GreenWay_Device
+public GreenWay_Device : DeviceID * Balance ==> GreenWay_Device
 	GreenWay_Device(ID,balan) == (
 	
 	id := ID;
 	balance := balan;
 	return self;
+	
 	);
 
 functions

@@ -18,11 +18,4 @@
 	<natures>
 		<nature>org.overture.ide.vdmpp.core.nature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>GreenWay.vdmpp</name>
-			<type>1</type>
-			<location>C:/Users/zzzzz/Desktop/trabalhos/mfes/MFES---green-way/GreenWay.vdmpp</location>
-		</link>
-	</linkedResources>
 </projectDescription>
