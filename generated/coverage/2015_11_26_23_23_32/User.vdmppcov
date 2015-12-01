@@ -1,0 +1,45 @@
+class User
+types
+-- TODO Define types here
+
+public String = seq of char;
+public UserID = nat1;
+public Device = GreenWay_Device`DeviceID;
+public Devices = seq of Device;
+public CardBalance = nat;
+
+
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+public name: String;
+public devices: Devices;
+public userid : UserID;
+public balance : CardBalance;
+operations
+-- TODO Define operations here
+--construtor
+public User : UserID * String * CardBalance ==> User
+	User(ID,name_,cardbalance_) == (
+	
+	userid := ID;
+	name := name_;
+	devices := [];
+	balance := cardbalance_;
+	return self;
+	
+	);
+	
+	--add money to card
+	public addBalance: CardBalance ==> ()
+	addBalance(balan) ==
+		balance := balance+balan;
+	
+	
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end User

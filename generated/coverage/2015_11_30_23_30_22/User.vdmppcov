@@ -29,7 +29,8 @@ public User : UserID * Name * CardBalance ==> User
 	balance := cardbalance_;
 	return self;
 	)
-	pre len name_ > 0 and cardbalance_ >= 0
+	pre len name_ > 0
+	and cardbalance_ >= 0 and ID >= 0
 	post userid  = ID and name = name_ and balance = cardbalance_;
 	
 	
@@ -51,13 +52,6 @@ public User : UserID * Name * CardBalance ==> User
 	pre deviceid_ not in set elems devices 
 	post len devices > len devices~;
 	
-	
-	public Payment: CardBalance ==> ()
-	Payment(balan) ==(
-		balance := balance-balan;
-		)
-		pre balan > 0
-		post balance > 0 and balance < balance~;
 
 functions
 -- TODO Define functiones here

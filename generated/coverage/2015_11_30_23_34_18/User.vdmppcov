@@ -51,13 +51,6 @@ public User : UserID * Name * CardBalance ==> User
 	pre deviceid_ not in set elems devices 
 	post len devices > len devices~;
 	
-	
-	public Payment: CardBalance ==> ()
-	Payment(balan) ==(
-		balance := balance-balan;
-		)
-		pre balan > 0
-		post balance > 0 and balance < balance~;
 
 functions
 -- TODO Define functiones here
