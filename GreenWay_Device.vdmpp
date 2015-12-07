@@ -46,7 +46,7 @@ public addLocation : Event ==> ()
 	addLocation(event) == (
 	location := event.getEventEntryPoint().getServiceLocation();
 	historic := [location]^historic;
-	event.Cost(self);--adiciona custos ao device
+	event.Cost(self);
 )post historic = [location]^historic~;
 
 
