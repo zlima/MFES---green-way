@@ -1,0 +1,124 @@
+class Event
+types
+public String = seq of char;
+public Device = GreenWay_Device;
+public HighWayCost = HighWayCosts;
+public Type = <AutoEstrada> | <Estacionamento> | <DriveThru> | <Gasolina>;   
+public PointExit = Service_Provider;
+public PointEntry = Service_Provider;
+
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+private name : String;
+private timeMin : nat;
+private device : Device;
+private pointExit : PointExit;
+private pointEntry : PointEntry;
+private cost : real;
+private highwaycost : HighWayCost;
+
+operations
+-- TODO Define operations here
+--caso de pagamento directo
+public Event : String * nat * Device * PointEntry * real ==> Event
+Event(name_, timeMin_, device_, pointEntry_, cost_) ==(
+name := name_;
+timeMin := timeMin_;
+device := device_;
+pointEntry := pointEntry_;
+cost := cost_;
+return self;
+)post name = name_ and timeMin = timeMin_ and device = device_ and pointEntry = pointEntry_ and cost = cost_;
+
+--caso em que o pagamento depende do ponto de saida
+public Event : String * nat * Device * PointEntry * PointExit * HighWayCosts ==> Event
+Event(name_, timeMin_, device_, pointEntry_, pointExit_,highwaycost_ ) ==(
+name := name_;
+timeMin := timeMin_;
+device := device_;
+pointEntry := pointEntry_;
+pointExit := pointExit_;
+highwaycost := highwaycost_;
+cost := 0;
+return self;
+)post name = name_ and timeMin = timeMin_ and device = device_ and pointEntry = pointEntry_ and cost = 0 and pointExit = pointExit_;
+
+
+--calculate Event Cost
+public Cost: Device ==> ()
+Cost(device_) == (
+if pointEntry.getServiceType() = <AutoEstrada> then
+	cost := highwaycost.Costs(pointEntry.getServiceLocation(),pointExit.getServiceLocation())
+	else
+	cost := pointEntry.serviceCost();
+	
+	device_.addDebt(cost);
+
+);
+
+	 public printEvent: () ==> ()
+			 printEvent() ==(
+			 if pointEntry.getServiceType() = <AutoEstrada> then
+			 	(	IO`println("Event:");
+				 	IO`print("Name: ");
+				 	IO`println(name);
+				 	IO`print("Point Of Service: ");
+				 	IO`println(pointEntry.getServiceLocation());
+			 		IO`println(" ");
+			 		)
+			 		else if pointEntry.getServiceType() = <Estacionamento> then
+			 	(	IO`println("Event:");
+				 	IO`print("Name: ");
+				 	IO`println(name);
+				 	IO`print("Point Of Service: ");
+				 	IO`println(pointEntry.getServiceLocation());
+			 		IO`println(" ");
+			 		)
+			 			else if pointEntry.getServiceType() = <Gasolina> then
+			 	(	IO`println("Event:");
+				 	IO`print("Name: ");
+				 	IO`println(name);
+				 	IO`print("Point Of Service: ");
+				 	IO`println(pointEntry.getServiceLocation());
+			 		IO`println(" ");
+			 		)
+			 		else
+			 		(
+			 			IO`println("Event:");
+				 		IO`print("Name: ");
+				 		IO`println(name);
+				 		IO`print("Cost: ");
+				 		IO`println(cost);
+					 	IO`print("Entry: ");
+					 	IO`println(pointEntry.getServiceLocation());
+					 	IO`print("Exit: ");
+					 	IO`println(pointExit.getServiceLocation());
+				 		IO`println(" ");
+				 		)
+			 );
+			 
+			 public getEventName:() ==> String
+			 	getEventName() == return name;
+			 	
+			 public getEventTime: () ==> nat
+			 		getEventTime() == return timeMin;
+			 		
+			 public getEventDevice: () ==> Device
+			 	getEventDevice() == return device;
+			 	
+			 public getEventEntryPoint: () ==> PointEntry
+			 		getEventEntryPoint() == return pointEntry;
+			 
+			  public getEventExitPoint: () ==> PointEntry
+			 		getEventExitPoint() == return pointExit;
+			 	
+
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Event

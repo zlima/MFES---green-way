@@ -1,0 +1,73 @@
+class Service_Provider
+types
+-- TODO Define types here
+public String = seq of char;
+public Type = <AutoEstrada> | <Estacionamento> | <Scut> | <DriveThru>;   
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+private name : String;
+private location : String;
+private type : Type;
+private cordX: real;
+private cordY: real;
+private cost: real;
+private tax : real;
+
+operations
+-- TODO Define operations here
+
+public Service_Provider : String * Type * String * real * real * real * real ==> Service_Provider
+Service_Provider(name_,type_,location_, cordX_, cordY_, tax_ ,cost_) ==(
+
+name := name_;
+type := type_;
+location := location_;
+cordX := cordX_;
+cordY := cordY_;
+cost := cost_;
+tax := tax_;
+
+return self;
+)
+post name = name_ and type = type_ and location = location_ and cordX = cordX_ and cordY = cordY_ and tax = tax_ and cost = cost_;
+
+-- se for Drivethru
+public calculatePoScost: () ==> real
+calculatePoScost() == return cost*tax;
+
+--custo directo
+public serviceCost : () ==> real
+serviceCost() == return cost;
+
+public printCost: () ==> ()
+printCost() ==(
+	IO`println("Cost of Service");
+	IO`println(cost);
+	IO`println(" ");
+);
+
+--gets
+
+public getServiceName: () ==> String
+	getServiceName() == return name;
+	
+public getServiceLocation: () ==> String
+	getServiceLocation() == return location;
+	
+	public getServiceCordX: () ==> real
+	getServiceCordX() == return cordX;
+	
+	public getServiceCordY: () ==> real
+	getServiceCordY() == return cordY;
+	
+	public getServiceType: () ==> Type
+	getServiceType() == return type;
+
+functions
+-- TODO Define functiones here
+
+traces
+-- TODO Define Combinatorial Test Traces here
+end Service_Provider

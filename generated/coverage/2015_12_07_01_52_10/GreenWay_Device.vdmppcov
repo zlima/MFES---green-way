@@ -1,0 +1,94 @@
+class GreenWay_Device
+types
+-- TODO Define types here
+
+public DeviceID = nat1;
+public UserID = nat1;
+public String = seq of char;
+public Plate = String;
+public Historic = seq of String;
+public Location = String;
+public Debt = real;
+/*
+*/
+
+
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+
+public id : DeviceID;
+public userID : UserID;
+public plate : Plate;
+public historic : Historic;
+private debt : Debt;
+private location : String;
+
+
+operations
+-- TODO Define operations here
+
+--construtor
+public GreenWay_Device : DeviceID * UserID * Plate ==> GreenWay_Device
+	GreenWay_Device(ID, userID_, plate_) == (
+	id := ID;
+	userID := userID_;
+	plate := plate_;
+	historic :=[];
+	debt := 0;
+	return self;
+	);
+
+--add location
+
+public addLocation : Event ==> ()
+	addLocation(event) == (
+	location := event.getEventEntryPoint().getServiceLocation();
+	historic := [location] ^ historic;
+)post historic = [location] ^ historic~;
+
+
+public clearDebts: () ==> ()
+	clearDebts() == debt :=0
+	post debt = 0;
+
+public addDebt : real ==> ()
+	addDebt(value) == (
+	debt := debt + value;
+	)post debt = debt~+value;
+	
+--print do historico do device
+public printDeviceHist: () ==> ()
+printDeviceHist() == (
+	IO`println("Historico do Dispositivo:");
+	IO`print("Matricula: ");
+	IO`println(plate);
+	for i in historic
+		do(
+			IO`println(i);
+			);
+			IO`println("");
+);
+
+
+public getDeviceID: () ==> nat
+	getDeviceID() == return id;
+	
+public getPlate: () ==> String
+	getPlate() == return plate;
+	
+public getDeviceHist: () ==> Historic
+	getDeviceHist() == return historic;
+	
+public getDebt : () ==> real
+	getDebt() == return debt; 
+	
+public getHistoricLoc: () ==> Historic
+	getHistoricLoc() == return historic;
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end GreenWay_Device
