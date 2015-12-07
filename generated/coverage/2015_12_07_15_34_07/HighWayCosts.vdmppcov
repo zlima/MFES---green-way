@@ -1,0 +1,45 @@
+class HighWayCosts
+types
+-- TODO Define types here
+public String = seq of char;
+public Cost_ = map seq of char to real;
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+private name : String;
+private cost : Cost_;
+private scutCost : real;
+private totalCost : real;
+private tempLocal : String;
+
+operations
+-- TODO Define operations here
+
+public HighWayCosts : String * Cost_ * real ==> HighWayCosts
+HighWayCosts(name_, costs_, scutCost_) == (
+	name := name_;
+	cost := costs_;
+	scutCost := scutCost_;
+	return self;
+)post name = name_ and cost = costs_ and scutCost = scutCost_;
+
+public Costs : String * String ==> real
+Costs(local1, local2) ==(
+concatLocation(local1, local2);
+totalCost := cost(tempLocal);
+IO`print("AQUI       ");
+IO`println(totalCost);
+return totalCost;
+);
+
+public concatLocation : String * String ==> ()
+concatLocation(local1, local2) == (
+tempLocal := local1 ^ local2;
+)post tempLocal = local1 ^ local2;
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end HighWayCosts

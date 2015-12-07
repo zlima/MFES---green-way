@@ -1,0 +1,68 @@
+class Testes is subclass of TestCaseUtils
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+operations
+-- TODO Define operations here
+private teste1: () ==> ()
+teste1() == (
+	--users
+		dcl u : User := new User(1,"José Lima",999999);
+		dcl u2 : User := new User(1,"John Cena",999999);
+	--devives	
+		dcl d : GreenWay_Device := new GreenWay_Device(1,1,"25-GG-31");
+	
+	--servicos
+		dcl sp: Service_Provider := new Service_Provider(<AutoEstrada>,"ponto1","LocalA",123,234);
+		dcl sp2: Service_Provider := new Service_Provider(<AutoEstrada>,"ponto2","LocalB",456,567);
+		dcl sp3: Service_Provider := new Service_Provider(<Estacionamento>,"parque1","LocalB",456,567,1.5);
+		dcl sp4: Service_Provider := new Service_Provider(<DriveThru>,"macBoavista","macBoavista",500,489,8);
+		dcl sp5: Service_Provider := new Service_Provider(<Gasolina>,"galpBoavista","Bomba Galp Boavista",500,489,50);
+	
+	--autoestradas
+	dcl hc : HighWayCosts := new HighWayCosts("estrada1", {"LocalALocalB" |-> 0.6, "LocalBLocalA" |-> 0.6},12);
+	
+	dcl ev : Event := new Event("AutoEstrada",10,d,sp,sp2,hc);
+	dcl ev2 : Event := new Event("Estacionamento",60,d,sp3,3);
+	dcl ev3 : Event := new Event("DriveThru mac", 66, d, sp4,15);
+	dcl ev4 : Event := new Event("Gasolina", 80, d, sp5, 50);
+	
+	dcl greenway: GreenWay := new GreenWay([u],[sp,sp2,sp3,sp4,sp5]);
+	
+	greenway.addUser(u2);
+	assertEqual([u,u2],greenway.getUsers());
+	
+	u.addDevice(d);
+	assertEqual([d], u.getDevices());
+		
+	d.addLocation(ev);
+	d.addLocation(ev2);
+	d.addLocation(ev3);
+	
+	
+	
+	assertEqual([ev3.getEventEntryPoint().getServiceLocation(), ev2.getEventEntryPoint().getServiceLocation(),ev.getEventEntryPoint().getServiceLocation()], d.getHistoricLoc());
+	d.addLocation(ev4);
+	
+	assertEqual([ev4.getEventEntryPoint().getServiceLocation(),ev3.getEventEntryPoint().getServiceLocation(), ev2.getEventEntryPoint().getServiceLocation(),ev.getEventEntryPoint().getServiceLocation()], d.getHistoricLoc());
+
+	d.printDeviceHist();
+	
+	ev.printEvent();
+	ev2.printEvent();
+	ev3.printEvent();
+	ev4.printEvent();
+);
+
+public static main: () ==> ()
+	main() == (
+		new Testes().teste1();
+	);
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Testes
