@@ -2,7 +2,7 @@ class Service_Provider
 types
 -- TODO Define types here
 public String = seq of char;
-public Type = <AutoEstrada> | <Estacionamento> | <DriveThru> | <Gasolina>;   
+public Type = <AutoEstrada> | <Scut> | <Estacionamento> | <DriveThru> | <Gasolina>;   
 values
 -- TODO Define values here
 instance variables
@@ -12,7 +12,7 @@ private location : String;
 private type : Type;
 private cordX: real;
 private cordY: real;
-private cost: real;
+
 
 
 operations
@@ -32,34 +32,7 @@ return self;
 post name = name_ and type = type_ and location = location_ and cordX = cordX_ and cordY = cordY_;
 
 
-public Service_Provider : Type * String * String * real * real * real ==> Service_Provider
-Service_Provider(type_,name_,location_, cordX_, cordY_ ,cost_) ==(
 
-name := name_;
-type := type_;
-location := location_;
-cordX := cordX_;
-cordY := cordY_;
-cost := cost_;
-
-return self;
-)
-post name = name_ and type = type_ and location = location_ and cordX = cordX_ and cordY = cordY_ and cost = cost_;
-
--- se for Drivethru
-public getPoScost: () ==> real
-getPoScost() == return cost;
-
---custo directo
-public serviceCost : () ==> real
-serviceCost() == return cost;
-
-public printCost: () ==> ()
-printCost() ==(
-	IO`println("Cost of Service");
-	IO`println(cost);
-	IO`println(" ");
-);
 
 --gets
 

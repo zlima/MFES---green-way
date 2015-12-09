@@ -23,13 +23,14 @@ private highwaycost : HighWayCost;
 operations
 -- TODO Define operations here
 --caso de pagamento directo
-public Event : String * nat * Device * PointEntry * real ==> Event
+public Event : String * nat * Device * PointEntry * real  ==> Event
 Event(name_, timeMin_, device_, pointEntry_, cost_) ==(
 name := name_;
 timeMin := timeMin_;
 device := device_;
 pointEntry := pointEntry_;
-cost := cost_;
+cost:= cost_;
+
 return self;
 )post name = name_ and timeMin = timeMin_ and device = device_ and pointEntry = pointEntry_ and cost = cost_;
 
@@ -51,10 +52,9 @@ return self;
 public Cost: Device ==> ()
 Cost(device_) == (
 if pointEntry.getServiceType() = <AutoEstrada> then
-	cost := highwaycost.Costs(pointEntry.getServiceLocation(),pointExit.getServiceLocation())
+	cost := highwaycost.Costs(pointEntry.getServiceLocation(),pointExit.getServiceLocation());
 	
-	else
-	cost := pointEntry.serviceCost();
+
 	
 	device_.addDebt(cost);
 
@@ -89,6 +89,19 @@ if pointEntry.getServiceType() = <AutoEstrada> then
 			 		IO`println(" ");
 			 		)
 			 			else if pointEntry.getServiceType() = <Gasolina> then
+			 (	IO`println("Event:");
+				 	IO`print("Name: ");
+				 	IO`println(name);
+				 	IO`print("Dispositivo: ");
+				 	IO`println(device.getDeviceID());
+				 	IO`print("Cost: ");
+				 	IO`print(cost);
+				 	IO`println("$");
+				 	IO`print("Point Of Service: ");
+				 	IO`println(pointEntry.getServiceLocation());
+			 		IO`println(" ");
+			 		)
+			 else if pointEntry.getServiceType() = <Scut> then
 			 (	IO`println("Event:");
 				 	IO`print("Name: ");
 				 	IO`println(name);
