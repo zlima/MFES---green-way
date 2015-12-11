@@ -44,21 +44,11 @@ teste1() == (
 	--servicos
 		dcl sp: Service_Provider := new Service_Provider(<AutoEstrada>,"ponto1","LocalA",123,234);
 		dcl sp2: Service_Provider := new Service_Provider(<AutoEstrada>,"ponto2","LocalB",456,567);
-<<<<<<< HEAD
-		dcl sp3: Service_Provider := new Service_Provider(<Estacionamento>,"parque1","LocalB",456,567,1.5);
-		dcl sp4: Service_Provider := new Service_Provider(<DriveThru>,"macBoavista","macBoavista",500,489,8);
-		dcl sp5: Service_Provider := new Service_Provider(<Gasolina>,"galpBoavista","Bomba Galp Boavista",500,489,50);
-		dcl sp6: Service_Provider := new Service_Provider(<Gasolina>,"bpAntas","Bomba BP Antas",123,234,99);
-		dcl sp7: Service_Provider := new Service_Provider(<AutoEstrada>,"ponto2","LocalB",456,567);
-		dcl sp8: Service_Provider := new Service_Provider(<Estacionamento>,"parque1","LocalB",456,567,1.5);
-		dcl sp9: Service_Provider := new Service_Provider(<DriveThru>,"macBoavista","macBoavista",500,489,8);
-		dcl sp10: Service_Provider := new Service_Provider(<Gasolina>,"galpBoavista","Bomba Galp Boavista",500,489,50);
-=======
 		dcl sp3: Service_Provider := new Service_Provider(<Estacionamento>,"parque1","LocalB",456,567);
 		dcl sp4: Service_Provider := new Service_Provider(<DriveThru>,"macBoavista","macBoavista",500,489);
 		dcl sp5: Service_Provider := new Service_Provider(<Gasolina>,"galpBoavista","Bomba Galp Boavista",500,489);
 		dcl sp6: Service_Provider := new Service_Provider(<Scut>,"a25 scut Ovar Norte","a25 s. Ovar norte",500,490);
->>>>>>> origin/master
+
 	
 	--autoestradas
 	dcl hc : HighWayCosts := new HighWayCosts("estrada1", {"LocalALocalB" |-> 0.6, "LocalBLocalA" |-> 0.6},12);
@@ -111,17 +101,12 @@ teste1() == (
 	IO`println("After payment: ");
 	greenway.printCost();
 	
-<<<<<<< HEAD
-	assertEqual(999999-60.1,u.getBalance());-- saldo apï¿½s pagamento
+
+	assertEqual(999999-68.1,u.getBalance());-- saldo apï¿½s pagamento
 	
 	u.addBalance(50);
-	assertEqual(999999-60.1 + 50,u.getBalance());-- saldo apï¿½s carregamento
-=======
-	assertEqual(999999-68.1,u.getBalance());-- saldo após pagamento
-	
-	u.addBalance(50);
-	assertEqual(999999-68.1 + 50,u.getBalance());-- saldo após carregamento
->>>>>>> origin/master
+	assertEqual(999999-68.1 + 50,u.getBalance());-- saldo apï¿½s carregamento
+
 	
 	
 	assertEqual("AutoEstrada",ev.getEventName());
