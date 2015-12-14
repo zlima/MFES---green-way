@@ -66,7 +66,7 @@ public User : UserID * Name * CardBalance ==> User
 		balance := balance-device_.getDebt();
 		device_.clearDebts();
 		)
-		post balance > 0 and balance <= balance~;
+		post balance > 0 and balance < balance~;
 		
 		public allPayed:() ==> ()
 			allPayed() == (

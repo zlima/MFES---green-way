@@ -27,7 +27,6 @@ public User : UserID * Name * CardBalance ==> User
 	userid := ID;
 	name := name_;
 	balance := cardbalance_;
-	devices := {};
 	return self;
 	)
 	pre len name_ > 0 and cardbalance_ >= 0
@@ -66,7 +65,7 @@ public User : UserID * Name * CardBalance ==> User
 		balance := balance-device_.getDebt();
 		device_.clearDebts();
 		)
-		post balance > 0 and balance <= balance~;
+		post balance > 0 and balance < balance~;
 		
 		public allPayed:() ==> ()
 			allPayed() == (
