@@ -5,12 +5,13 @@ values
 -- TODO Define values here
 instance variables
 -- TODO Define instance variables here
+u : User := new User(1,"Jose Lima",999999);
 operations
 -- TODO Define operations here
 private teste1: () ==> ()
 teste1() == (
 	--users
-		dcl u : User := new User(1,"Jose Lima",999999);
+		 
 		dcl u2 : User := new User(2,"John Cena",999999);
 		dcl u3 : User := new User(3,"Josefino Ferreira Filho",999999);
 		dcl u4 : User := new User(4,"Nilmar de Jesus",999999);

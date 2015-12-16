@@ -48,7 +48,7 @@ public User : UserID * Name * CardBalance ==> User
 	
 	devices := {device_} union devices;
 	
-	)pre device_ not in set devices
+	) 
 	post card devices > card devices~;
 	
 	
@@ -83,5 +83,4 @@ functions
 -- TODO Define functiones here
 traces
 -- TODO Define Combinatorial Test Traces here
-
 end User
